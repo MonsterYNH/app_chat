@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  app_api:
+    image: runnermonster/app_api:latest
+    ports:
+      - 6000:6000
+    restart: always
+    environment:
+      - ENV_MONGO_URL=172.36.0.4
+    depends_on:
+      - app_mongo
+    networks:
+      extnetwork:
+        ipv4_address: 172.36.0.2
+  app_static:
+    image: runnermonster/app_static:latest
+    restart: always
+    ports:
+      - 7000:7000
+    networks:
+      extnetwork:
+        ipv4_address: 172.36.0.3
+  app_mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27018:27017
+    networks:
+      extnetwork:
+        ipv4_address: 172.36.0.4
+  app_websocket:
+    image: runnermonster/app_websocket:latest
+    restart: always
+    ports:
+      - 3456:3456
+    environment:
+      - ENV_MONGO_URL=172.36.0.4
+    depends_on:
+      - app_mongo
+    networks:
+      extnetwork:
+        ipv4_address: 172.36.0.5
+networks:
+  extnetwork:
+    ipam:
+      config:
+        - subnet: 172.36.0.1/16

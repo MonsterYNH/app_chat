@@ -33,6 +33,12 @@ func (controller *RoomController) GetUserRoom(c *gin.Context) {
 				}
 				entry.Title = friend.Name
 				entry.Avatar = friend.Avatar
+				unRead, err := model.GetUserRoomUnReadMessageCount(entry.ID.Hex(), user1Id.Hex())
+				if err != nil {
+					model.Result(c, 111, nil, err)
+					return
+				}
+				entry.UnRead = unRead
 			}
 			if user.ID.Hex() != user2Id.Hex() {
 				friend, err := model.GetUserById(user2Id.Hex())
@@ -42,14 +48,14 @@ func (controller *RoomController) GetUserRoom(c *gin.Context) {
 				}
 				entry.Title = friend.Name
 				entry.Avatar = friend.Avatar
+				unRead, err := model.GetUserRoomUnReadMessageCount(entry.ID.Hex(), user2Id.Hex())
+				if err != nil {
+					model.Result(c, 111, nil, err)
+					return
+				}
+				entry.UnRead = unRead
 			}
 		}
-		unRead, err := model.GetUserRoomUnReadMessageCount(entry.ID.Hex(), user.ID.Hex())
-		if err != nil {
-			model.Result(c, 111, nil, err)
-			return
-		}
-		entry.UnRead = unRead
 		results = append(results, entry)
 	}
 	model.Result(c, 111, results, nil)

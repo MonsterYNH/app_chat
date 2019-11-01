@@ -19,7 +19,7 @@ func Result(c *gin.Context, code int, data interface{}, err error) {
 		log.Println("ERROR: ", err)
 	}
 	if c != nil {
-		c.AbortWithStatusJSON(http.StatusOK, Response{
+		c.JSON(http.StatusOK, Response{
 			Code: code,
 			Message: message,
 			Data: data,

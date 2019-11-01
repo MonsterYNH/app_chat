@@ -1,38 +1,17 @@
 package middleware
 
 import (
-	"bytes"
-	"encoding/json"
-	"github.com/pkg/errors"
-	"net/http"
+	"chat/model"
+	socket "chat/model/websocket"
+	"fmt"
+	"github.com/gin-gonic/gin"
 )
 
-type MessageData struct {
-	UserId string `json:"user_id"`
-	Type   int    `json:"type"`
-	Num    int    `json:"num"`
-}
+func SendUserRoomMiddleware(c *gin.Context) {
+	c.Next()
 
-func requestWebSocketApi(url string, data interface{}) error {
-	client := &http.Client{}
-
-	byteData, err := json.Marshal(data)
-	if err != nil {
-		return err
-	}
-
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(byteData))
-	if err != nil {
-		return err
-	}
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return errors.New("ERROR: request with error: " + string(byteData))
-	}
-	return nil
+	userEntry, _ := c.Get("user")
+	user := userEntry.(*model.User)
+	fmt.Println("asdasdasdasdad")
+	socket.WebSocketUtil.SendUserRoomEvent(user.ID.Hex())
 }

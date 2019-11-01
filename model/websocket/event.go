@@ -6,6 +6,7 @@ import (
 	"chat/model"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -30,7 +31,7 @@ func (util *SocketUtil) SendUserLoginEvent(userId string) {
 	}
 }
 
-func (util *SocketUtil) SendUserRoomEvent(userId string, num int) {
+func (util *SocketUtil) SendUserRoomEvent(userId string) {
 	rooms, err := model.GetRooms(userId)
 	if err != nil {
 		log.Println("ERROR: get user rooms failed, error: ", err)
@@ -38,14 +39,19 @@ func (util *SocketUtil) SendUserRoomEvent(userId string, num int) {
 	}
 
 	for _, entry := range rooms {
-		unRead, err := model.GetUserRoomUnReadMessageCount(entry.ID.Hex(), userId)
-		if err != nil {
-			log.Println("ERROR: get user room unread message failed, error: ", err)
-			continue
-		}
-		if err := util.baseUrl(userId, EVENT_USER_ROOM_STATUS, unRead); err != nil {
-			log.Println("ERROR: send user room unread message failed, error: ", err)
-			continue
+		for _, user := range entry.Members {
+			fmt.Println(user.Hex(), "========", userId)
+			if user.Hex() != userId {
+				unRead, err := model.GetUserRoomUnReadMessageCount(entry.ID.Hex(), user.Hex())
+				if err != nil {
+					log.Println("ERROR: get user room unread message failed, error: ", err)
+					continue
+				}
+				if err := util.baseUrl(user.Hex(), EVENT_USER_ROOM_STATUS, unRead); err != nil {
+					log.Println("ERROR: send user room unread message failed, error: ", err)
+					continue
+				}
+			}
 		}
 	}
 }

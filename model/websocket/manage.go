@@ -1,6 +1,9 @@
 package socket
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 type Manage struct {
 	clients map[string]*Client
@@ -20,6 +23,9 @@ func(manage *Manage) AddClient(userId string, client *Client) {
 
 func(manage *Manage) GetClient(userId string) (*Client, bool) {
 	manage.lock.Lock()
+	for key, _ := range manage.clients {
+		fmt.Println(key)
+	}
 	client, exist := manage.clients[userId]
 	manage.lock.Unlock()
 	return client, exist

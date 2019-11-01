@@ -11,6 +11,7 @@ var (
 	ENV_COLL_ROOM = "room"
 	ENV_COLL_USER = "user"
 	ENV_COLL_MESSAGE = "message"
+	ENV_COLL_ARTICLE = "article"
 
 	ENV_MONGO_URL = "localhost:27017"
 	ENV_SERVER_URL = "0.0.0.0:6000"
@@ -19,7 +20,7 @@ var (
 	ENV_STATIC_SERVER_PATH = "/media"
 	ENV_TOKEN_SECRET = "secret"
 
-	ENV_SOCKET_API_URL = "localhost:3456/message"
+	ENV_SOCKET_API_URL = "http://localhost:3456/message"
 )
 
 func init() {

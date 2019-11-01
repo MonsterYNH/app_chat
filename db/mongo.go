@@ -28,3 +28,11 @@ func init() {
 func GetMgoSession() *mgo.Session {
 	return MongoSession.Copy()
 }
+
+func FlushDb() {
+	if err := MongoSession.DB(config.ENV_DB_NAME).DropDatabase(); err != nil {
+		log.Println("ERROR: flush db failed, error: ", err)
+	} else {
+		log.Println("ERROR: flush db success")
+	}
+}

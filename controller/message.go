@@ -82,3 +82,28 @@ func (controller *MessageController) PostRoomMessage(c *gin.Context) {
 	}
 	model.Result(c, 111, message, nil)
 }
+
+func (controller *MessageController) SetUserRoomMessageRead(c *gin.Context) {
+	var message model.Message
+	if err := c.BindJSON(&message); err != nil {
+		model.Result(c, 111, nil, err)
+		return
+	}
+	userEntry, _ := c.Get("user")
+	user := userEntry.(*model.User)
+	room, err := model.GetRoomById(message.RoomID.Hex())
+	if err != nil {
+		model.Result(c, 111, nil, err)
+		return
+	}
+	for _, entry := range room.Members {
+		if entry.Hex() != user.ID.Hex() {
+			if err := model.SetUserRoomMessageRead(message.RoomID.Hex(), user.ID.Hex()); err != nil {
+				model.Result(c, 111, nil, err)
+				return
+			}
+		}
+	}
+
+	model.Result(c, 111, "success", nil)
+}

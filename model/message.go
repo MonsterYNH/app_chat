@@ -3,7 +3,6 @@ package model
 import (
 	"chat/config"
 	"chat/db"
-	"fmt"
 	"github.com/pkg/errors"
 	"gopkg.in/mgo.v2/bson"
 	"strings"
@@ -128,7 +127,7 @@ func GetUserRoomUnReadMessage(roomId, userId string) ([]Message, error) {
 	defer session.Close()
 
 	messages := make([]Message, 0)
-	return messages, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject.Hex(), "room_id": roomIdObject.Hex()}).Sort("create_time").All(&messages)
+	return messages, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject.Hex(), "room_id": roomIdObject.Hex(), "status": 0}).Sort("create_time").All(&messages)
 }
 
 func GetUserRoomUnReadMessageCount(roomId, userId string) (int, error) {
@@ -139,12 +138,11 @@ func GetUserRoomUnReadMessageCount(roomId, userId string) (int, error) {
 	}
 	session := db.GetMgoSession()
 	defer session.Close()
-	fmt.Println("user_id: ", userId, ", room_id: ", roomId)
 
-	return session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject, "room_id": roomIdObject}).Count()
+	return session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject, "room_id": roomIdObject, "status": 0}).Count()
 }
 
-func SetUserRoomMessageRead(roomId, userId string) (error) {
+func SetUserRoomMessageRead(roomId, userId string) error {
 	roomIdObject := bson.ObjectIdHex(roomId)
 	userIdObject := bson.ObjectIdHex(userId)
 	if !roomIdObject.Valid() || !userIdObject.Valid() {
@@ -153,5 +151,6 @@ func SetUserRoomMessageRead(roomId, userId string) (error) {
 	session := db.GetMgoSession()
 	defer session.Close()
 
-	return session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Update(bson.M{"create_time": bson.M{"$lte": time.Now().Unix()}}, bson.M{"$set": bson.M{"status": 1}})
+	_, err := session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).UpdateAll(bson.M{"room_id": roomIdObject, "user_id": userIdObject}, bson.M{"$set": bson.M{"status": 1}})
+	return err
 }

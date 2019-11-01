@@ -3,6 +3,7 @@ package main
 import (
 	"chat/config"
 	"chat/controller"
+	"chat/db"
 	"chat/middleware"
 	"chat/model"
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 )
 
 func main() {
-	createTestUser()
+	//createTestUser()
 	engineServer := gin.Default()
 
 	var userGroupController = controller.UserController{}
@@ -40,12 +41,23 @@ func main() {
 	messageGroup := v1Api.Group("/message")
 	var messageGroupController = controller.MessageController{}
 	{
-		messageGroup.POST("/create", messageGroupController.PostRoomMessage)
+		messageGroup.POST("/create", messageGroupController.PostRoomMessage, middleware.SendUserRoomMiddleware)
+		messageGroup.POST("/read", messageGroupController.SetUserRoomMessageRead)
+	}
+
+	// article
+	articleGroup := v1Api.Group("/article")
+	var articleGroupController = controller.ArticleController{}
+	{
+		articleGroup.POST("/create", articleGroupController.PostCreateArticle)
+		articleGroup.GET("/list", articleGroupController.GetArticleList)
+		articleGroup.POST("/comment/:id", articleGroupController.PostCreateArticleComment)
 	}
 	engineServer.Run(config.ENV_SERVER_URL)
 }
 
 func createTestUser() {
+	db.FlushDb()
 	userCuteId := bson.NewObjectId()
 	userMonsterId := bson.NewObjectId()
 	user := model.User{
@@ -70,4 +82,23 @@ func createTestUser() {
 	}
 	user.Update()
 	monster.Update()
+
+	room := model.Room{
+		Type: model.ROOM_TYPE_FRIEND,
+		Members: []bson.ObjectId{user.ID, monster.ID},
+		CreateUser: user.ID,
+	}
+
+	room.Update()
+
+	message := model.Message{
+		UserID: user.ID,
+		RoomID: room.ID,
+		Type: model.MESSAGE_TYPE_CHAT,
+		Content: "123123123",
+	}
+
+	message.Update()
+
+	model.SetUserRoomMessageRead(room.ID.Hex(), user.ID.Hex())
 }

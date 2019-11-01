@@ -74,4 +74,14 @@ func TestMessage_Update(t *testing.T) {
 	t.Log(message)
 }
 
+func TestArticle_Update(t *testing.T) {
+	article := Article{
+		UserId: bson.NewObjectId(),
+		Content: "第一篇文章",
+	}
+	if err := article.Update(); err != nil {
+		t.Fatal(err)
+	}
+}
+
 

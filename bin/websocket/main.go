@@ -56,13 +56,16 @@ func WebSocket(c *gin.Context) {
 	defer ws.Close()
 
 	client := socket.CreateClient(ws)
+	log.Println("INFO: new client connect, user_id: ", claims.Id)
 	Manage.AddClient(claims.Id, client)
 	client.ListenClient()
+	log.Println("INFO: client disconnect, user_id: ", claims.Id)
 }
 
 func (controller *MessageController) SendMessage(c *gin.Context) {
 	var messageData Data
 	if err := c.BindJSON(&messageData); err != nil {
+		log.Println("ERROR: bind parameter error: ", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err,
 		})
@@ -71,6 +74,7 @@ func (controller *MessageController) SendMessage(c *gin.Context) {
 	bytes, _ := json.Marshal(messageData)
 	fmt.Println(string(bytes))
 	if len(messageData.UserId) == 0 || messageData.Type == 0 {
+		log.Println("ERROR: parameter error")
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": errors.New("ERROR: parameter error"),
 		})
@@ -78,12 +82,14 @@ func (controller *MessageController) SendMessage(c *gin.Context) {
 	}
 	client, exist := Manage.GetClient(messageData.UserId)
 	if !exist {
+		log.Println("ERROR: client is out of line")
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "client is out of line",
 		})
 		return
 	}
 	if err := client.SendMessage(messageData.Type, messageData.Num, "ping"); err != nil {
+		log.Println("ERROR: send message failed, error: ", err)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": err,
 		})

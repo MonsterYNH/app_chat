@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4725aa3-9dff-44e2-ad76-a2e599944167" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/article.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/article.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/api/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/static/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/websocket/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/api/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/websocket/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/websocket/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/websocket/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/websocket/main_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/room.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/room.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/mongo.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/mongo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware/event.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/event.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/model_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/model_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/websocket/event.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/websocket/event.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/websocket/manage.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/websocket/manage.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,38 +33,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dockerfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/websocket/client.go">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
+              <caret selection-end-line="23" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/room.go">
+        <entry file="file://$PROJECT_DIR$/bin/api/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+            <state relative-caret-position="45">
+              <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/message.go">
+        <entry file="file://$PROJECT_DIR$/bin/static/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2085">
-              <caret line="146" column="44" selection-start-line="146" selection-start-column="44" selection-end-line="146" selection-end-column="44" />
+            <state relative-caret-position="45">
+              <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/websocket/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -184,6 +170,9 @@
         <option value="$PROJECT_DIR$/model/article.go" />
         <option value="$PROJECT_DIR$/bin/api/main.go" />
         <option value="$PROJECT_DIR$/controller/article.go" />
+        <option value="$PROJECT_DIR$/bin/api/Dockerfile" />
+        <option value="$PROJECT_DIR$/bin/static/Dockerfile" />
+        <option value="$PROJECT_DIR$/bin/websocket/Dockerfile" />
       </list>
     </option>
   </component>
@@ -397,7 +386,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.40843374" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" weight="0.40843374" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -405,7 +394,7 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50143063" side_tool="true" weight="0.40843374" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -491,7 +480,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/static/dockerfile" />
     <entry file="file://$PROJECT_DIR$/../gopkg.in/mgo.v2/session.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -500,7 +488,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bin/docker-compose.yml" />
-    <entry file="file://$PROJECT_DIR$/bin/api/dockerfile" />
     <entry file="file://$PROJECT_DIR$/bin/test/main.go" />
     <entry file="file://$PROJECT_DIR$/bin/api/vendor/chat/config/config.go" />
     <entry file="file://$PROJECT_DIR$/controller/static.go" />
@@ -695,13 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/api/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/websocket/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-249">
@@ -709,10 +689,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dockerfile">
+    <entry file="file://$PROJECT_DIR$/bin/api/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+        <state relative-caret-position="915">
+          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/api/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/static/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="23" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/websocket/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
         </state>
       </provider>
     </entry>

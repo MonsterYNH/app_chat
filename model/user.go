@@ -23,6 +23,13 @@ type User struct {
 	Status     int             `json:"-" bson:"status"`
 }
 
+type UserInfo struct {
+	ID       *bson.ObjectId `json:"id" bson:"_id"`
+	Name     string         `json:"name" bson:"name"`
+	Avatar   string         `json:"avatar" bson:"avatar"`
+	Signture string         `json:"signture" bson:"signture"`
+}
+
 func (user *User) Update() error {
 	session := db.GetMgoSession()
 	defer session.Close()
@@ -60,10 +67,10 @@ func GetUserByAccountAndPassword(account, password string) (*User, error) {
 	return &user, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_USER).Find(bson.M{"account": account, "password": password}).One(&user)
 }
 
-func (user *User) GetUserFriends() ([]User, error) {
+func (user *User) GetUserFriends() ([]UserInfo, error) {
 	session := db.GetMgoSession()
 	defer session.Close()
 
-	users := make([]User, 0)
+	users := make([]UserInfo, 0)
 	return users, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_USER).Find(bson.M{"_id": bson.M{"$in": user.Friends}}).Select(bson.M{"friends": 0}).All(&users)
 }

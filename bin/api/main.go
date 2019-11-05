@@ -25,6 +25,7 @@ func main() {
 	{
 		userGroup.GET("/list", userGroupController.GetUserRelationShip)
 		userGroup.PUT("/update", userGroupController.UpdateUser)
+		userGroup.GET("/info/:id", userGroupController.GetUser)
 	}
 
 	// room
@@ -52,6 +53,7 @@ func main() {
 		articleGroup.POST("/create", articleGroupController.PostCreateArticle)
 		articleGroup.GET("/list", articleGroupController.GetArticleList)
 		articleGroup.POST("/comment/:id", articleGroupController.PostCreateArticleComment)
+		articleGroup.POST("/like", articleGroupController.LikeAndDislikeArticle)
 	}
 	engineServer.Run(config.ENV_SERVER_URL)
 }

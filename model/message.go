@@ -15,24 +15,26 @@ const (
 )
 
 type Message struct {
-	ID            bson.ObjectId `json:"id" bson:"_id"`
-	UserID        bson.ObjectId `json:"user_id" bson:"user_id"`
-	RoomID        bson.ObjectId `json:"room_id" bson:"room_id"`
-	Type          int           `json:"type" bson:"type"`
-	Content       string        `json:"content" bson:"content"`
-	CreateTime    int64         `json:"create_time" bson:"create_time"`
-	Status        int           `json:"-" bson:"status"`
+	ID         bson.ObjectId `json:"id" bson:"_id"`
+	UserID     bson.ObjectId `json:"user_id" bson:"user_id"`
+	RoomID     bson.ObjectId `json:"room_id" bson:"room_id"`
+	Type       int           `json:"type" bson:"type"`
+	Content    string        `json:"content" bson:"content"`
+	CreateTime int64         `json:"create_time" bson:"create_time"`
+	IsRead     bool          `json:"is_read" bson:"is_read"`
+	Status     int           `json:"-" bson:"status"`
 }
 
 type MessageResult struct {
-	ID            bson.ObjectId `json:"id" bson:"_id"`
-	UserID        bson.ObjectId `json:"user_id" bson:"user_id"`
-	RoomID        bson.ObjectId `json:"room_id" bson:"room_id"`
-	Type          int           `json:"type" bson:"type"`
-	Content       string        `json:"content" bson:"content"`
-	CreateTime    int64         `json:"create_time" bson:"create_time"`
-	UserName      string        `json:"user_name" bson:"user_name"`
-	UserAvatar    string        `json:"user_avatar" bson:"user_avatar"`
+	ID         bson.ObjectId `json:"id" bson:"_id"`
+	UserID     bson.ObjectId `json:"user_id" bson:"user_id"`
+	RoomID     bson.ObjectId `json:"room_id" bson:"room_id"`
+	Type       int           `json:"type" bson:"type"`
+	Content    string        `json:"content" bson:"content"`
+	CreateTime int64         `json:"create_time" bson:"create_time"`
+	UserName   string        `json:"user_name" bson:"user_name"`
+	IsRead     bool          `json:"is_read" bson:"is_read"`
+	UserAvatar string        `json:"user_avatar" bson:"user_avatar"`
 }
 
 func (message *Message) Update() error {
@@ -127,7 +129,7 @@ func GetUserRoomUnReadMessage(roomId, userId string) ([]Message, error) {
 	defer session.Close()
 
 	messages := make([]Message, 0)
-	return messages, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject.Hex(), "room_id": roomIdObject.Hex(), "status": 0}).Sort("create_time").All(&messages)
+	return messages, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject.Hex(), "room_id": roomIdObject.Hex(), "is_read": false}).Sort("create_time").All(&messages)
 }
 
 func GetUserRoomUnReadMessageCount(roomId, userId string) (int, error) {
@@ -139,7 +141,7 @@ func GetUserRoomUnReadMessageCount(roomId, userId string) (int, error) {
 	session := db.GetMgoSession()
 	defer session.Close()
 
-	return session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject, "room_id": roomIdObject, "status": 0}).Count()
+	return session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).Find(bson.M{"user_id": userIdObject, "room_id": roomIdObject, "is_read": false}).Count()
 }
 
 func SetUserRoomMessageRead(roomId, userId string) error {
@@ -151,6 +153,6 @@ func SetUserRoomMessageRead(roomId, userId string) error {
 	session := db.GetMgoSession()
 	defer session.Close()
 
-	_, err := session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).UpdateAll(bson.M{"room_id": roomIdObject, "user_id": userIdObject}, bson.M{"$set": bson.M{"status": 1}})
+	_, err := session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_MESSAGE).UpdateAll(bson.M{"room_id": roomIdObject, "user_id": userIdObject}, bson.M{"$set": bson.M{"is_read": true}})
 	return err
 }

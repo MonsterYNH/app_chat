@@ -11,24 +11,24 @@ import (
 type Article struct {
 	ID          bson.ObjectId   `json:"id" bson:"_id"`
 	UserId      bson.ObjectId   `json:"user_id" bson:"user_id"`
+	User        *UserInfo       `json:"user" bson:"user"`
 	Content     string          `json:"content" bson:"content"`
 	Images      []string        `json:"images" bson:"images"`
 	CreateTime  int64           `json:"create_time" bson:"create_time"`
-	LikeUserIds []bson.ObjectId `json:"-" bson:"like_user_ids"`
-	LikeUsers   []User          `json:"like_users" bson:"-"`
+	LikeUserIds []bson.ObjectId `json:"like_user_ids" bson:"like_user_ids"`
 	Comments    []Comment       `json:"comments" bson:"comments"`
 	Status      int             `json:"-" bson:"status"`
 }
 
 type Comment struct {
-	ID         bson.ObjectId `json:"id" bson:"_id"`
-	FromUserId bson.ObjectId `json:"from_user_id" bson:"from_user_id"`
-	FromUser   *User         `json:"from_user" bson:"-"`
-	ToUserId   bson.ObjectId `json:"to_user_id" bson:"to_user_id"`
-	ToUser     *User         `json:"to_user" bson:"to_user"`
-	Content    string        `json:"content" bson:"content"`
-	CreateTime int64         `json:"create_time" bson:"create_time"`
-	Status     int           `json:"-" bson:"status"`
+	ID         bson.ObjectId  `json:"id" bson:"_id"`
+	FromUserId *bson.ObjectId `json:"from_user_id" bson:"from_user_id"`
+	FromUser   *UserInfo      `json:"from_user" bson:"from_user"`
+	ToUserId   *bson.ObjectId `json:"to_user_id" bson:"to_user_id"`
+	ToUser     *UserInfo      `json:"to_user" bson:"to_user"`
+	Content    string         `json:"content" bson:"content"`
+	CreateTime int64          `json:"create_time" bson:"create_time"`
+	Status     int            `json:"-" bson:"status"`
 }
 
 func (article *Article) Update() error {
@@ -52,7 +52,7 @@ func (article *Article) Update() error {
 	return err
 }
 
-func GetUserArticlesByPage(id string, page, pageSize int) ([]Article, error) {
+func GetUserArticlesByPage(id string, page, pageSize int) ([]*Article, error) {
 	idObject := bson.ObjectIdHex(id)
 	if !idObject.Valid() {
 		return nil, errors.New("ERROR: user id is not valid")
@@ -61,8 +61,38 @@ func GetUserArticlesByPage(id string, page, pageSize int) ([]Article, error) {
 	session := db.GetMgoSession()
 	defer session.Close()
 
-	articles := make([]Article, 0)
-	return articles, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_ARTICLE).Find(bson.M{"status": 0, "user_id": idObject}).Sort("create_time").Skip((page-1)*pageSize).Limit(pageSize).All(&articles)
+	articles := make([]*Article, 0)
+	return articles, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_ARTICLE).Pipe([]bson.M{
+		bson.M{
+			"$match": bson.M{
+				"status":  0,
+				"user_id": idObject,
+			},
+		},
+		bson.M{
+			"$lookup": bson.M{
+				"from":         "user",
+				"foreignField": "_id",
+				"localField":   "user_id",
+				"as":           "user",
+			},
+		},
+		bson.M{
+			"$unwind": "$user",
+		},
+		bson.M{
+			"$sort": bson.M{
+				"create_time": 1,
+			},
+		},
+		bson.M{
+			"$skip": (page - 1) * pageSize,
+		},
+		bson.M{
+			"$limit": pageSize,
+		},
+	}).All(&articles)
+	// articles, session.DB(config.ENV_DB_NAME).C(config.ENV_COLL_ARTICLE).Find(bson.M{"status": 0, "user_id": idObject}).Sort("create_time").Skip((page - 1) * pageSize).Limit(pageSize).All(&articles)
 }
 
 func GetArticleById(id string) (*Article, error) {

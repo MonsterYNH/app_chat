@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
+	"log"
 )
 
 type MessageController struct {}
@@ -98,6 +99,7 @@ func (controller *MessageController) SetUserRoomMessageRead(c *gin.Context) {
 	}
 	for _, entry := range room.Members {
 		if entry.Hex() != user.ID.Hex() {
+			log.Println(message.RoomID.Hex(), user.ID.Hex())
 			if err := model.SetUserRoomMessageRead(message.RoomID.Hex(), user.ID.Hex()); err != nil {
 				model.Result(c, 111, nil, err)
 				return

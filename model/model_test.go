@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
 	"gopkg.in/mgo.v2/bson"
 	"testing"
 )
@@ -82,6 +83,13 @@ func TestArticle_Update(t *testing.T) {
 	if err := article.Update(); err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestGetArticleById(t *testing.T) {
+	ids := []int{1,2,3,4,5,6,7,8,9}
+	index := 2
+	ids = append(ids[:index], ids[index+1:]...)
+	fmt.Println(ids)
 }
 
 

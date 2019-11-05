@@ -121,3 +121,16 @@ func (controller *UserController) UpdateUser(c *gin.Context) {
 	}
 	model.Result(c, 111, user, nil)
 }
+
+func (controller *UserController) GetUser(c *gin.Context) {
+	id := c.Param("id")
+	user, err := model.GetUserById(id)
+	if err != nil {
+		model.Result(c, 111, nil, err)
+		return
+	}
+	model.Result(c, 111, model.UserInfo{
+		Name: user.Name,
+		Avatar: user.Avatar,
+	}, nil)
+}

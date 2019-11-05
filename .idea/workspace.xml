@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4725aa3-9dff-44e2-ad76-a2e599944167" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/bin/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/api/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/model_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/model_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/static/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/static/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,15 +58,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/message.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1237">
-              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/github.com/gin-gonic/gin/recovery.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -85,13 +69,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/article.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
+            <state relative-caret-position="1595">
               <caret line="116" column="39" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bin/static/main.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="838">
+              <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+              <folding>
+                <element signature="e#14#143#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/user.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-14">
@@ -127,6 +123,7 @@
       <find>signature is invalid</find>
       <find>friend</find>
       <find>LatestMessage</find>
+      <find>model</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
@@ -146,7 +143,6 @@
         <option value="$PROJECT_DIR$/bin/docker-compose.yml" />
         <option value="$PROJECT_DIR$/bin/test/main.go" />
         <option value="$PROJECT_DIR$/main.go" />
-        <option value="$PROJECT_DIR$/bin/static/main.go" />
         <option value="$PROJECT_DIR$/controller/common.go" />
         <option value="$PROJECT_DIR$/controller/websocket.go" />
         <option value="$PROJECT_DIR$/dockerfile" />
@@ -177,6 +173,7 @@
         <option value="$PROJECT_DIR$/controller/article.go" />
         <option value="$PROJECT_DIR$/controller/user.go" />
         <option value="$PROJECT_DIR$/model/user.go" />
+        <option value="$PROJECT_DIR$/bin/static/main.go" />
       </list>
     </option>
   </component>
@@ -287,7 +284,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go (2)">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="chat" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -302,6 +299,15 @@
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/bin/websocket/main.go" />
+      <package value="chat" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="chat" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/bin/static/main.go" />
       <package value="chat" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -328,24 +334,13 @@
       <pattern value="^TestGetArticleById$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestWebSocket in chat/bin/websocket" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="chat" />
-      <working_directory value="$PROJECT_DIR$/bin/websocket" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="chat/bin/websocket" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <pattern value="^TestWebSocket$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build main.go (2)" />
         <item itemvalue="Go Test.TestGetArticleById in chat/model" />
         <item itemvalue="Go Build.go build main.go (4)" />
         <item itemvalue="Go Test.TestArticle_Update in chat/model" />
-        <item itemvalue="Go Test.TestWebSocket in chat/bin/websocket" />
       </list>
     </recent_temporary>
   </component>
@@ -383,13 +378,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" weight="0.40843374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.40843374" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,7 +393,7 @@
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32891566" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50143063" side_tool="true" weight="0.40843374" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -512,13 +508,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/util/event.go" />
-    <entry file="file://$PROJECT_DIR$/bin/static/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util/token.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -720,13 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/article.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="116" column="39" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/user.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -738,6 +720,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/article.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1595">
+          <caret line="116" column="39" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/static/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="57" column="6" selection-start-line="57" selection-start-column="6" selection-end-line="57" selection-end-column="6" />
+          <folding>
+            <element signature="e#14#143#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -2,10 +2,10 @@ package main
 
 import (
 	"chat/config"
-	"chat/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/mgo.v2/bson"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -40,16 +40,20 @@ type StaticController struct {
 func (controller *StaticController) Upload(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {
-		model.Result(c, 111, nil, err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
 		return
 	}
 	fileName := bson.NewObjectId().Hex()
 	ext := filepath.Ext(file.Filename)
 	if err := c.SaveUploadedFile(file, path.Join(controller.SavePath, fileName + ext)); err != nil {
-		model.Result(c, 111, nil, err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
 		return
 	}
-	model.Result(c, 111, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"url": path.Join(controller.ServerPath, fileName + ext),
-	}, nil)
+	})
 }

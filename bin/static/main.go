@@ -41,6 +41,7 @@ func (controller *StaticController) Upload(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
+			"code": 1,
 			"message": err,
 		})
 		return
@@ -49,11 +50,13 @@ func (controller *StaticController) Upload(c *gin.Context) {
 	ext := filepath.Ext(file.Filename)
 	if err := c.SaveUploadedFile(file, path.Join(controller.SavePath, fileName + ext)); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
+			"code": 1,
 			"message": err,
 		})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"url": path.Join(controller.ServerPath, fileName + ext),
+		"code": 0,
+		"data": path.Join(controller.ServerPath, fileName + ext),
 	})
 }
